@@ -1,25 +1,22 @@
-# Iterator 사용
-import random
+import time
+import sys
 
+def elapsed(func):
+  def inner_func(*args, **kwargs):
+    start = time.time()
+    result = func(*args, **kwargs)
+    end = time.time()
+    print(f"함수 수행시간: {end-start}초")
+    return result
+  return inner_func
 
-class LottoIterator:
-    def __init__(self):
-        self.data = list(range(1, 46))
+@elapsed
+def my_func(a: int , b: int):
+  sum = 0
+  for i in range(a, b + 1):
+    sum += i
+  return sum
 
-    def __iter__(self):
-        return self
+a, b = map(int, input().split())
+print(my_func(a, b))
 
-    def __next__(self):
-        if len(self.data) < 1:
-            raise StopIteration
-        result = self.data.pop(random.randint(0, len(self.data)))
-        return result
-
-
-my_lotto = LottoIterator()
-for i in my_lotto:
-    print(i)
-
-# data = list(range(1, 46))
-# for _ in range(5):
-#     print(data.pop(random.randint(0, len(data))))

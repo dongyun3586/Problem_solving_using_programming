@@ -12,7 +12,7 @@ for _ in range(count):
         pick_num = random.randint(1, 45)
         if pick_num not in lotto:
             lotto.append(pick_num)
-        if len(lotto)>=6:
+        if len(lotto) >= 6:
             break
     total_lotto.append(lotto)
 
