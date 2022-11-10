@@ -1,30 +1,28 @@
-import pprint
+from math import inf
 
 n, m = map(int, input().split())
-
-m += 1
-INF = 9
-weight = [[INF] * m for _ in range(m)]
+weight = [[inf] * n for _ in range(n)]
 
 # 가중치 인접행렬 구성
-for i in range(1, m):
+for i in range(n):
     a, b = map(int, input().split())
-    weight[a][b] = weight[b][a] = 1
+    weight[a-1][b-1] = 1
+    weight[b-1][a-1] = 1
 
-# pprint.pprint(weight)
+# k = 거쳐가는 노드, v = 출발 노드, w = 도착 노드
+for k in range(n):
+    weight[k][k] = 0
+    for v in range(n):
+        for w in range(n):
+            weight[v][w] = min(weight[v][w], weight[v][k] + weight[k][w])
 
-def floydWarshall(g):
-    step = -1
+row_sum = inf
+min_index = 0
+for i in range(n):
+    kb = sum(weight[i])
+    if kb < row_sum:
+        row_sum = kb
+        min_index = i
 
-    for k in range(1, m):          # k = 거쳐가는 노드
-        for v in range(1, m):      # v = 출발 노드
-            for w in range(1, m):  # w = 도착 노드
-                if g[v][k] + g[k][w] < g[v][w]:
-                    g[v][w] = g[v][k] + g[k][w]
-        pprint.pprint(weight)
-        print()
-
-floydWarshall(weight)
-
-
+print(min_index + 1)
 
