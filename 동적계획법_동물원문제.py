@@ -1,8 +1,7 @@
-def choose_animals(animals, payload_limit):  #  W: 트럭의 무게한도, wt: 각 동물의 무게, val: 각 동물의 가치, n: 동물의 수
+def choose_animals(animals, payload_limit):  # : 트럭의 무게한도, wt: 각 동물의 무게, val: 각 동물의 가치, n: 동물의 수
   n = len(animals)
-  # K = [[0 for x in range(payload_limit+1)] for x in range(n+1)]      # DP를 위한 2차원 리스트 초기화
-  K = [[0] * (payload_limit + 1) for i in range(n + 1)]
-  names = [[[] for x in range(payload_limit + 1)] for x in range(n + 1)]  # 동물 이름 저장 2차원 리스트 초기화
+  K = [[0] * (payload_limit + 1) for _ in range(n + 1)]   # DP를 위한 2차원 리스트 초기화
+  names = [[[] for _ in range(payload_limit + 1)] for _ in range(n + 1)]  # 동물 이름 저장 2차원 리스트 초기화
   for i in range(n + 1):  # 동물 숫자만큼 반복
     for w in range(payload_limit + 1):  # 트럭의 무게한도만큼 반복
       if i == 0 or w == 0:  # 0번째 행/열은 0으로 세팅
