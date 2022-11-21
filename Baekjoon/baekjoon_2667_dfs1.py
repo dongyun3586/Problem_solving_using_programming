@@ -12,8 +12,8 @@ def dfs(x, y):
     dfs(x, y-1)
     dfs(x+1, y)
     dfs(x, y+1)
-    return 1
-  return 0
+    return True
+  return False
 
 n = int(input())
 
